@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 
-// create a dummy data source object for paql using typeorm
+// create a dummy data source object for psql using typeorm
 const myDataSource = new DataSource({
   type: "postgres",
   host: "localhost",
@@ -17,4 +17,4 @@ const myDataSource = new DataSource({
     subscribersDir: "src/subscriber",
   },
 });
-await myDataSource.connect();
+export default myDataSource;
