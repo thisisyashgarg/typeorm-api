@@ -1,7 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
-import AppDataSource from "./ormconfig";
-
+import AppDataSource from "./ormConfig";
 config();
 
 const app = express();
@@ -12,8 +11,8 @@ AppDataSource.initialize()
     app.listen(PORT, () => {
       console.log(`Server started at http://localhost:${PORT}`);
     });
-    console.log("Data Source has been initialized!");
+    console.log("Connected to postgres");
   })
   .catch((err) => {
-    console.error("Error during Data Source initialization", err);
+    console.error("Error connecting to postgres", err);
   });

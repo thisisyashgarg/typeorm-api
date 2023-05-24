@@ -1,12 +1,15 @@
 import { DataSource } from "typeorm";
+import { Client } from "./entities/Client";
 
 const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
-  port: Number(process.env.DB_PORT),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: "test",
+  host: process.env.DATA_SOURCE_HOST,
+  port: Number(process.env.DATA_SOURCE_PORT),
+  username: process.env.DATA_SOURCE_USERNAME,
+  password: undefined,
+  database: process.env.DATA_SOURCE_DATABASE,
+  entities: [Client],
+  synchronize: true,
 });
 
 export default AppDataSource;
