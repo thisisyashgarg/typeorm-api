@@ -1,26 +1,15 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
-  BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
+import { Person } from "./utils/Person";
+import { Transaction } from "./Transaction";
 
 @Entity("clients")
-export class Client extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
-
-  @Column({ type: "varchar" })
-  firstName: string;
-
-  @Column({ type: "varchar" })
-  lastName: string;
-
-  @Column({ type: "varchar", unique: true })
-  email: string;
-
+export class Client extends Person {
   @Column({ type: "varchar", length: 10 })
   cardNUmber: string;
 
@@ -35,11 +24,12 @@ export class Client extends BaseEntity {
   @Column({ type: "boolean", default: true })
   isActive: boolean;
 
-  @CreateDateColumn({type: "timestamp"})
+  @CreateDateColumn({ type: "timestamp" })
   createdAt: Date;
 
-  @UpdateDateColumn({type: "timestamp"})
+  @UpdateDateColumn({ type: "timestamp" })
   updatedAt: Date;
 
-  
+  @OneToMany(() => Transaction, (transaction) => transaction.client)
+  transactions: Transaction[];
 }
